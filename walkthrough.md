@@ -108,17 +108,31 @@ phpinfo();
 2. Visit http://localhost/phpinfo.php in your browser.
 ✅ If you see the PHP info page, IIS + PHP is working!
 
-## 🛠️ Step 3: Install MySQL and Prepare the Database
-1. Download and Install MySQL
-- Head to the MySQL Community Downloads page and grab the MySQL Installer for Windows.
-- During installation:
-- Choose Server Only or Developer Default.
-- Use Standard Configuration.
-- Set a root password you'll remember (e.g., root for local testing).
-- Enable MySQL to run as a Windows service.
-2. Launch MySQL Workbench or HeidiSQL
-- These tools make it easier to manage your database visually.
-- If you prefer command line, open the MySQL shell.
-3. Create the osTicket Database
-CREATE DATABASE osticket;
+## Step 3: Install MySQL and Create osTicket Database
+
+---
+
+### 🛠️ 1. Download & Install MySQL Community Server
+
+1. Go to the official MySQL site:  
+   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
+2. Choose the **Windows (x86, 64-bit) MSI Installer** version
+3. Run the installer → Select **Developer Default** setup (includes MySQL Server and Workbench)
+4. Set a **strong root password** during setup
+5. After installation, launch **MySQL Workbench** or use **Command Line Client** to access the server
+
+✅ You now have a local MySQL instance running on Windows Server.
+
+---
+
+### 📦 2. Create Database and User for osTicket
+
+#### a. Launch **MySQL Workbench** or MySQL Command Line  
+#### b. Run the following queries:
+
+```sql
+CREATE DATABASE osticket_db;
+CREATE USER 'osticket_user'@'localhost' IDENTIFIED BY 'SuperSecurePass123!';
+GRANT ALL PRIVILEGES ON osticket_db.* TO 'osticket_user'@'localhost';
+FLUSH PRIVILEGES;
 
