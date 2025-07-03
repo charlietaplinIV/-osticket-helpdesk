@@ -1,3 +1,28 @@
+# 🧰 Help Desk Ticketing System – osTicket Lab (Windows Server)
+
+This project sets up a fully functional, self-hosted help desk ticketing system using **osTicket** on **Windows Server 2022** with **IIS**, **PHP**, and **MySQL**. The goal is to simulate real-world IT support workflows—including ticket generation, role-based response management, and SLA enforcement—for portfolio demonstration and hands-on learning.
+
+---
+
+## 📌 Project Overview
+
+| Feature            | Description                                              |
+|--------------------|----------------------------------------------------------|
+| 🎯 Purpose         | Build a self-hosted help desk system for IT simulations  |
+| 🖥️ Stack           | Windows Server 2022 + IIS + PHP + MySQL                  |
+| 💬 Platform        | osTicket (open-source support ticketing system)          |
+| 🌐 Access          | Web-based staff and client portals                       |
+| 👤 Roles           | Admins, Agents, End Users                                |
+
+---
+
+## 🔧 Tools & Technologies
+
+- **Operating System**: Windows Server 2022
+- **Web Server**: IIS (Internet Information Services)
+- **Database**: MySQL or MariaDB
+- **Backend**: PHP 8.1+
+- **Application**: osTicket (latest version)
 
 ---
 
