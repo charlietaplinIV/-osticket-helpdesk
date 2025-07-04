@@ -135,4 +135,162 @@ CREATE DATABASE osticket_db;
 CREATE USER 'osticket_user'@'localhost' IDENTIFIED BY 'SuperSecurePass123!';
 GRANT ALL PRIVILEGES ON osticket_db.* TO 'osticket_user'@'localhost';
 FLUSH PRIVILEGES;
+```
 
+✅ 3. Record Database Info for osTicket Installer
+You'll need this later:
+- Database Name: osticket_db
+- Username: osticket_user
+- Password: SuperSecurePass123!
+- Host: localhost
+
+## Step 4: Deploy osTicket on Windows Server with IIS
+
+This step installs and launches the web-based osTicket installer by preparing the files and linking them to IIS.
+
+---
+
+### 📥 1. Download osTicket
+
+- Go to the official site:  
+  [https://osticket.com/download](https://osticket.com/download)
+- Download the latest **stable release (.zip)**
+
+---
+
+### 📁 2. Extract and Place Files
+
+1. Extract the contents of the zip file locally (e.g., `C:\osticket-temp`)
+2. Copy all contents inside the `upload` folder to:  C:\inetpub\wwwroot\osticket
+3. Set file permissions:
+- Right-click the `osticket` folder → Properties → Security
+- Grant **IIS_IUSRS** and **Authenticated Users**:
+  - Modify / Write / Read permissions
+
+📌 *Ensure folders like `include/` and `scp/` are writable during install.*
+
+---
+
+### 🌐 3. Create osTicket Site in IIS
+
+1. Open **IIS Manager**
+2. Right-click **Sites** → Add Website:
+- **Site name**: `osticket`
+- **Physical path**: `C:\inetpub\wwwroot\osticket`
+- **Port**: `8080` *(or any unused port)*
+- **Host name**: *(leave blank if local testing)*
+
+3. Start the site in IIS
+
+---
+
+### 🧪 4. Launch Installer via Web Browser
+
+Visit: http://localhost:8080/setup/
+
+Fill out:
+- **Admin Name**, **Email**, and **System Email**
+- Database info:
+  - Host: `localhost`
+  - DB Name: `osticket_db`
+  - DB User: `osticket_user`
+  - DB Password: `SuperSecurePass123!`
+
+✅ osTicket will configure its database and install the core system.
+
+---
+
+### 🧹 5. Post-Install Cleanup
+
+1. Delete the `setup/` directory inside `osticket`
+2. Rename the config file: include/ost-config.php.new → include/ost-config.php
+3. Double-check that the `include/` folder is **not writable**
+
+✅ Your help desk portal is now up and running securely.
+Once osTicket installs cleanly, you’ll be able to log in at: http://localhost:8080/scp/
+
+## Step 5: osTicket Configuration and Customization
+
+---
+
+### 🧑‍💼 1. Log Into Staff Control Panel
+
+- Visit:  http://localhost:8080/scp/
+  
+- Log in using the admin email and password you created during installation
+- You’ll land in the **Agent Dashboard** with access to system-wide settings
+
+---
+
+### 🏢 2. Create Support Departments
+
+Go to:  
+**Admin Panel → Staff → Departments**
+
+Create key support units like:
+
+| Department | Purpose                        |
+|------------|--------------------------------|
+| IT Support | Hardware, software, networks   |
+| HR Support | Employee and onboarding issues |
+| Facilities| Equipment, room access, repairs |
+
+📌 These help categorize ticket routing and improve resolution flow.
+
+---
+
+### 👩‍💻 3. Add Agent Accounts and Roles
+
+**Admin Panel → Staff → Add New Agent**
+
+Set up roles:
+
+| Name     | Role    | Department   |
+|----------|---------|--------------|
+| Jane     | Admin   | IT Support   |
+| Marcus   | Tier 1  | HR Support   |
+| Maya     | Tech    | Facilities   |
+
+Customize permissions based on responsibilities (view, post replies, transfer tickets).
+
+---
+
+### 📋 4. Define Help Topics
+
+**Admin Panel → Manage → Help Topics**
+
+Examples:
+
+- Password Reset
+- Printer Issue
+- Software Installation Request
+- Facility Access Request
+
+> These appear when users submit tickets and help auto-assign departments.
+
+---
+
+### ⏱️ 5. Set SLA Plans
+
+**Admin Panel → Manage → SLA Plans**
+
+Add response/resolution timers:
+
+| Plan Name      | Response Time | Resolution Time |
+|----------------|---------------|-----------------|
+| Standard SLA   | 8 hours       | 3 days          |
+| Urgent Tickets | 1 hour        | 1 day           |
+
+---
+
+### 🧪 6. Submit a Sample Ticket
+
+**Open Tickets → New Ticket**
+
+- Submit using test details for one of your Help Topics
+- Watch how it auto-routes to an agent and applies SLA
+- Check notifications and escalation settings
+
+---
+
+You're now managing a ticketing system that simulates enterprise-level support operations. Want help exporting your config into a `config_summary.md` or organizing screenshots for your portfolio repo next? You’re assembling a project worth showing off 💼📸
