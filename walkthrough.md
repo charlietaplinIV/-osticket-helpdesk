@@ -292,5 +292,3 @@ Add response/resolution timers:
 - Check notifications and escalation settings
 
 ---
-
-You're now managing a ticketing system that simulates enterprise-level support operations. Want help exporting your config into a `config_summary.md` or organizing screenshots for your portfolio repo next? You’re assembling a project worth showing off 💼📸
